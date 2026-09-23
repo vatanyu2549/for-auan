@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ขอเป็นแฟนได้ไหม 🩵</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&family=Kanit:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#f4faff;--bg2:#d8ecff;--card:rgba(255,255,255,.85);--ink:#4a6fa8;--soft:#7c98c4;--btn:#9fcbff;--btn2:#78b0f7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#0f1c3a;--bg2:#1b2f5e;--card:rgba(20,34,68,.78);--ink:#e6efff;--soft:#a9c1ef}}
+:root[data-theme="dark"]{--bg1:#0f1c3a;--bg2:#1b2f5e;--card:rgba(20,34,68,.78);--ink:#e6efff;--soft:#a9c1ef}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(160deg,var(--bg1),var(--bg2));font-family:'Mali','Kanit',system-ui,sans-serif;color:var(--ink);overflow-x:hidden;overflow-y:auto;display:flex}
+#bg{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.card{margin:auto;position:relative;z-index:2;width:min(88vw,420px);background:var(--card);backdrop-filter:blur(8px);border-radius:28px;padding:32px 24px;text-align:center;box-shadow:0 12px 40px rgba(120,176,247,.3)}
+h1{font-size:1.7rem;margin:.2em 0 .3em}
+p{color:var(--soft);line-height:1.7;margin:.4em 0 1.2em}
+.q{font-size:1.25rem;color:var(--ink);font-weight:600}
+.btns{display:flex;gap:14px;justify-content:center;align-items:center;min-height:56px;flex-wrap:wrap}
+button{font:inherit;border:0;border-radius:999px;padding:12px 26px;font-size:1.05rem;cursor:pointer;transition:transform .2s}
+#yes,#nxt,#more{background:linear-gradient(135deg,var(--btn),var(--btn2));color:#fff;box-shadow:0 6px 16px rgba(120,176,247,.5)}
+#yes:active{transform:scale(.95)}
+#no{background:#e6f1ff;color:#6a98d8}
+.hide{display:none}
+#pn{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:12px;z-index:9;width:40px;height:40px;padding:0;font-size:1.1rem;background:var(--card);box-shadow:0 3px 10px rgba(120,176,247,.35)}
+#mus{width:auto;height:40px;padding:0 16px;display:flex;align-items:center;text-decoration:none;color:var(--ink);font-size:.85rem;border-radius:999px}
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.gal img{width:100%;height:110px;object-fit:cover;border:4px solid #fff;border-radius:10px;box-shadow:0 4px 12px rgba(120,176,247,.35);opacity:0;animation:pop .7s ease forwards}.gal img:nth-child(odd){transform:rotate(-2.5deg)}.gal img:nth-child(even){transform:rotate(2.5deg)}.gal img:nth-child(2){animation-delay:.25s}.gal img:nth-child(3){animation-delay:.5s}.gal img:nth-child(4){animation-delay:.75s}
+@keyframes pop{from{opacity:0;scale:.85}to{opacity:1;scale:1}}
+#mus{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;z-index:9;width:auto;height:40px;padding:0 16px;font-size:.85rem;background:var(--card);box-shadow:0 3px 10px rgba(120,176,247,.35)}
+.em{margin:10px 0 0;padding:10px 14px;border-radius:16px;background:#e8f2ff;color:#3f6fd0;font-weight:600;line-height:1.7;white-space:pre-line}.em:empty{display:none}
+.note{font-size:.92rem;margin:18px 0 0}.note b{display:block;margin-top:6px;color:#3f6fd0;font-size:1.1rem}
+.dots span{width:8px;height:8px;border-radius:50%;background:#d4e6ff;display:inline-block;margin:0 3px}.dots .on{background:#78b0f7}
+.pop{animation:pop .6s ease}@keyframes pop{from{transform:scale(.8);opacity:0}}
+.bubble{display:inline-block;background:#fff;color:var(--ink);border-radius:16px;padding:6px 14px;font-size:.9rem;margin:2px 0 8px;box-shadow:0 3px 10px rgba(120,176,247,.3);min-height:1.9em}
+.pup{cursor:pointer}.pup:active{transform:scale(.92)}
+#ask p,#done p{white-space:pre-line}
+.fl{position:fixed;bottom:-30px;z-index:1;pointer-events:none;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-115vh) translateX(20px) rotate(30deg);opacity:0}}
+#yes{transition:transform .3s}
+.pup{width:130px;height:120px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+#done h1{font-size:2rem}
+.petal{position:fixed;top:-30px;z-index:3;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
+</style>
+</head>
+<body>
+<button id="pn" aria-label="เพลงเปียโน">🎵</button>
+<svg id="bg"></svg>
+
+<div class="card" id="story"><svg class="pup" viewBox="0 0 120 110"><ellipse cx="22" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(12 22 62)"/><ellipse cx="98" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(-12 98 62)"/><circle cx="60" cy="58" r="36" fill="#fff" stroke="#cfe3fb" stroke-width="2"/><g class="eyes"><circle cx="47" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="73" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="46" cy="56.8" r="1.1" fill="#fff"/><circle cx="72" cy="56.8" r="1.1" fill="#fff"/></g><ellipse cx="38" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="82" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="60" cy="65" rx="3" ry="2.2" fill="#f2a5b8"/><path class="mouth" d="M53 71 Q60 78 67 71" stroke="#3b4f7a" stroke-width="2" fill="none" stroke-linecap="round"/><g transform="translate(60,24)"><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(0)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(90)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(180)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(270)"/><circle r="3" fill="#eef6ff"/></g></svg><h1 id="sh"></h1><p id="intro" style="min-height:7em;margin-bottom:.4em"></p><div class="em" id="em"></div><div class="gal" id="gal"></div><div class="dots" id="dots"></div><div class="btns" style="margin-top:16px"><button id="nxt"></button></div></div>
+
+<div class="card hide" id="ask">
+  <svg class="pup" viewBox="0 0 120 110"><ellipse cx="22" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(12 22 62)"/><ellipse cx="98" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(-12 98 62)"/><circle cx="60" cy="58" r="36" fill="#fff" stroke="#cfe3fb" stroke-width="2"/><g class="eyes"><circle cx="47" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="73" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="46" cy="56.8" r="1.1" fill="#fff"/><circle cx="72" cy="56.8" r="1.1" fill="#fff"/></g><ellipse cx="38" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="82" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="60" cy="65" rx="3" ry="2.2" fill="#f2a5b8"/><path class="mouth" d="M53 71 Q60 78 67 71" stroke="#3b4f7a" stroke-width="2" fill="none" stroke-linecap="round"/><g transform="translate(60,24)"><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(0)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(90)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(180)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(270)"/><circle r="3" fill="#eef6ff"/></g></svg>
+  <h1>เป็นแฟนกับเค้ามั้ยอ้วนน? 🩵</h1>
+  <p>เค้าจะตั้งใจรักเธอเป็นอย่างดี
+ถ้าความรู้สึกที่มีให้เธอมีเลเวล
+ตอนนี้สำหรับเธอในฐานะคนคุย เค้าคงเลเวลตันแล้ว</p>
+  <div class="btns">
+    <button id="yes">ได้สิ 🩵</button>
+    <button id="no">ไม่</button>
+  </div>
+  <p class="note">ถ้าอ้วนยังไม่พร้อม เค้าก็จะอยู่กับอ้วนแบบนี้ต่อไปป
+รอวันที่อ้วนพร้อม เค้าจะมาขอใหม่</p>
+</div>
+
+<div class="card hide" id="done">
+  <svg class="pup" viewBox="0 0 120 110"><ellipse cx="22" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(12 22 62)"/><ellipse cx="98" cy="62" rx="14" ry="30" fill="#fff" stroke="#cfe3fb" stroke-width="2" transform="rotate(-12 98 62)"/><circle cx="60" cy="58" r="36" fill="#fff" stroke="#cfe3fb" stroke-width="2"/><g class="eyes"><circle cx="47" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="73" cy="58" r="3.6" fill="#3b4f7a"/><circle cx="46" cy="56.8" r="1.1" fill="#fff"/><circle cx="72" cy="56.8" r="1.1" fill="#fff"/></g><ellipse cx="38" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="82" cy="68" rx="7" ry="4.5" fill="#ffc6d6" opacity=".8"/><ellipse cx="60" cy="65" rx="3" ry="2.2" fill="#f2a5b8"/><path class="mouth" d="M53 71 Q60 78 67 71" stroke="#3b4f7a" stroke-width="2" fill="none" stroke-linecap="round"/><g transform="translate(60,24)"><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(0)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(90)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(180)"/><ellipse cx="0" cy="-7" rx="5" ry="6" fill="#a9cdff" stroke="#fff" stroke-width="1" transform="rotate(270)"/><circle r="3" fill="#eef6ff"/></g></svg><div style="font-size:1.6rem">🩵🌸🩵</div>
+  <h1>เค้าดีใจที่สุดเลยยย</h1>
+  <p>อ้วนของเค้าา 🩵
+อยากหอมแก้ม อยากจุ๊บเหม่งงด้วยยย
+ต่อไปนี้เธอเป็นแฟนเค้าแล้วนะอ้วนน</p>
+  <div class="em" style="font-size:1.2rem">เค้ารักอ้วนนะ 🩵</div>
+</div>
+
+<script>
+const blues=['#a9cdff','#c2dcff','#93bffa','#d4e6ff','#9dc6ff','#b5d5ff','#cfe3ff'];
+function floret(x,y,s,rot,c){
+  let g='<g transform="translate('+x+','+y+') rotate('+rot+')">';
+  for(let k=0;k<4;k++)g+='<ellipse cx="'+(s*.5)+'" cy="0" rx="'+(s*.55)+'" ry="'+(s*.4)+'" fill="'+c+'" stroke="#fff" stroke-opacity=".5" stroke-width=".8" transform="rotate('+(k*90)+')"/>';
+  return g+'<circle r="'+(s*.14)+'" fill="#e8f1ff"/></g>';
+}
+function cluster(cx,cy,r,n){
+  let out='';
+  for(let i=0;i<n;i++){
+    const a=i*2.39996,d=r*Math.sqrt(i/n);
+    const x=cx+d*Math.cos(a),y=cy+d*Math.sin(a);
+    out+=floret(x.toFixed(1),y.toFixed(1),(r/6.5).toFixed(1),(i*37)%90,blues[i%blues.length]);
+  }
+  return out;
+}
+function leaf(x,y,rot,l){return '<path d="M0,0 C'+l*.3+','+(-l*.35)+' '+l*.8+','+(-l*.25)+' '+l+',0 C'+l*.8+','+l*.25+' '+l*.3+','+l*.35+' 0,0Z" fill="#5f9e8a" opacity=".75" transform="translate('+x+','+y+') rotate('+rot+')"/>';}
+const bg=document.getElementById('bg');
+function drawBg(){
+  const w=innerWidth,h=innerHeight,R=Math.max(110,Math.min(Math.min(w,h)*.34,240));
+  bg.setAttribute('viewBox','0 0 '+w+' '+h);
+  let o='';
+  o+=leaf(w*.05,h*.16,20,R*1.1)+leaf(w*.06,h*.2,60,R*.9)+leaf(w*.95,h*.86,200,R*1.15)+leaf(w*.93,h*.84,235,R*.9);
+  o+=cluster(w*.04,h*.1,R,90)+cluster(w*.96,h*.92,R*1.1,100)+cluster(w*.97,h*.06,R*.6,50)+cluster(w*.03,h*.95,R*.6,50);
+  if(w>700)o+=cluster(w*.16,h*.9,R*.55,45)+cluster(w*.84,h*.12,R*.55,45);
+  bg.innerHTML=o;
+}
+drawBg();addEventListener('resize',drawBg);
+
+document.getElementById('yes').onclick=()=>{
+  document.getElementById('ask').classList.add('hide');
+  document.getElementById('done').classList.remove('hide');
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.style.left=Math.random()*100+'vw';
+    p.style.width=p.style.height=(10+Math.random()*14)+'px';
+    p.style.background=blues[i%blues.length];
+    p.style.borderRadius='60% 40% 60% 40%';
+    p.style.animationDuration=(3+Math.random()*3)+'s';
+    p.style.animationDelay=(Math.random()*1.5)+'s';
+    document.body.appendChild(p);
+  }
+};
+const no=document.getElementById('no');
+let tries=0;
+function dodge(e){
+  e.preventDefault();
+  tries++;
+  no.style.position='fixed';
+  no.style.zIndex=5;
+  no.style.left=(10+Math.random()*70)+'vw';
+  no.style.top=(10+Math.random()*75)+'vh';
+  no.style.transform='scale('+Math.max(.5,1-tries*.08)+')';
+  if(tries>4)no.textContent='ลองใหม่นะ 🥺';
+}
+no.addEventListener('mouseenter',dodge);
+no.addEventListener('touchstart',dodge,{passive:false});
+no.addEventListener('click',dodge);
+
+const $=q=>document.querySelectorAll(q);
+const EY=$('.eyes')[0].innerHTML;
+const eyeSet={normal:EY,
+ happy:'<path d="M41 60 Q47 51 53 60M67 60 Q73 51 79 60" stroke="#3b4f7a" stroke-width="2.6" fill="none" stroke-linecap="round"/>',
+ sad:EY+'<ellipse cx="44" cy="68" rx="2" ry="3.4" fill="#8fc2ff"/><ellipse cx="76" cy="68" rx="2" ry="3.4" fill="#8fc2ff"/>'};
+const mouthSet={normal:'M53 71 Q60 78 67 71',happy:'M51 69 Q60 83 69 69',sad:'M54 77 Q60 70 66 77'};
+function mood(m){$('.eyes').forEach(e=>e.innerHTML=eyeSet[m]);$('.mouth').forEach(e=>e.setAttribute('d',mouthSet[m]));}
+function talk(t){}
+function floaty(ch,x,y,n){for(let i=0;i<n;i++){const h=document.createElement('div');h.className='petal';h.textContent=ch;h.style.cssText='position:fixed;top:'+y+'px;left:'+(x+(Math.random()*80-40))+'px;font-size:'+(14+Math.random()*14)+'px;background:none;animation:fall '+(1.6+Math.random()*1.4)+'s ease-out forwards';h.style.transform='translateY(0)';document.body.appendChild(h);setTimeout(()=>h.remove(),3200);}}
+const chats=['ฮึบ! มีคนแอบชอบเธออยู่นะ 🩵','เธอน่ารักที่สุดเลย 🌸','เอ๊ะ ใจเต้นแรงจัง 💓','บอกความลับให้… เขาตื่นเต้นมาก!','ตอบว่าได้ทีเถอะนะ 🥺'];
+let ci=0;
+$('.pup').forEach(p=>p.addEventListener('click',e=>{const r=p.getBoundingClientRect();floaty('🩵',r.left+r.width/2,r.top+30,5);mood('happy');talk(chats[ci++%chats.length]);setTimeout(()=>{if(tries<1)mood('normal')},1200);}));
+const IMGS=[];
+// story pages
+const pages=[["อ้วนนน เค้ามีอะไรจะบอกกก 🌧️","ตั้งแต่เค้าเจอเธอครั้งแรก\nคือเค้าคุยกับพี่เลยว่า ชอบคนนี้ 🩵"],["และวันนี้ก็เป็นวันที่ 24/09 แล้ว","เค้าเกิด 24/10 ส่วนเธอเกิด 24/11\nเค้าว่ามันเป็นวันที่เหมาะสมดีเหมือนกันน\nแล้วก็จำง่ายด้วยยย ✨"],["เค้ารู้นะ…","เค้ารู้ว่าอ้วนเจออะไรมา ผ่านอะไรมามากมายย\nแต่ตอนนี้อ้วนมีเค้าแล้ว\nเค้าจะอยู่ข้างๆ อ้วนตรงนี้ และไม่ไปไหนแน่นอนนน","เค้าสัญญา 🤞\nถ้าเค้าผิดสัญญา เค้าจะซื้อน้ำส้มปั่นให้เธอ 20 แก้ว\nแล้วก็หมาล่าทอด 20 ไม้ ด้วยยยย 🍊🍢"]];
+let pi=0,tmr;
+const nxt=document.getElementById('nxt'),dots=document.getElementById('dots');
+function typeIt(el,t,cb){clearInterval(tmr);let i=0;el.textContent='';tmr=setInterval(()=>{el.textContent=t.slice(0,++i);if(i>=t.length){clearInterval(tmr);if(cb)cb();}},45);}
+function showPage(){const em=document.getElementById('em'),gal=document.getElementById('gal');em.textContent='';em.classList.remove('pop');gal.innerHTML='';document.getElementById('sh').textContent=pages[pi][0];
+ typeIt(document.getElementById('intro'),pages[pi][1],()=>{if(pages[pi][2]){em.classList.add('pop');typeIt(em,pages[pi][2]);}if(pages[pi][3]=='gal')gal.innerHTML=IMGS.map(u=>'<img alt="" src="'+u+'">').join('');});
+ dots.innerHTML=pages.map((_,i)=>'<span class="'+(i==pi?'on':'')+'"></span>').join('');
+ nxt.textContent=pi==pages.length-1?'ไปต่อ… 💓':'ถัดไป 🩵';}
+nxt.onclick=()=>{if(pi<pages.length-1){pi++;showPage();mood('happy');setTimeout(()=>mood('normal'),900);}
+ else{clearInterval(tmr);document.getElementById('story').classList.add('hide');const a=document.getElementById('ask');a.classList.remove('hide');a.classList.add('pop');mood('normal');floaty('🩵',innerWidth/2,innerHeight*.3,8);}};
+showPage();
+// ambient floaters
+setInterval(()=>{const f=document.createElement('div');f.className='fl';f.textContent=['🩵','🤍','✨','🌸'][Math.floor(Math.random()*4)];f.style.left=Math.random()*100+'vw';f.style.fontSize=(10+Math.random()*12)+'px';f.style.opacity=.6;f.style.animationDuration=(7+Math.random()*5)+'s';document.body.appendChild(f);setTimeout(()=>f.remove(),12500);},900);
+// no button reactions
+const sad=['อย่าเพิ่งไม่สิ 🥺','ลองคิดดูอีกทีนะ…','น้องหมาเสียใจแล้วนะ 😢','ปุ่มนี้หนีเก่งจัง 🏃','กดปุ่มใหญ่ๆ ดีกว่านะ 🩵','ขอร้องล่ะ 🥹'];
+function react(){mood('sad');talk(sad[Math.min(tries-1,sad.length-1)]);const y=document.getElementById('yes');y.style.transform='scale('+Math.min(1+tries*.12,1.7)+')';}
+no.addEventListener('mouseenter',react);no.addEventListener('touchstart',react);no.addEventListener('click',react);
+document.getElementById('yes').addEventListener('click',()=>{mood('happy');const w=innerWidth/2;floaty('🩵',w,innerHeight*.4,14);floaty('🌸',w,innerHeight*.4,10);floaty('✨',w,innerHeight*.4,8);});
+// music: original soft piano (limited to avoid distortion)
+let ac,master,mTimer,mStep=0,mOn=false;const DT=.55;
+const BASS=[48,40,41,48,45,40,41,43];
+const TONES=[[60,64,67],[59,64,67],[60,65,69],[60,64,67],[60,64,69],[59,64,67],[60,65,69],[59,62,67]];
+const PAT=[0,1,2,1,0,1,2,1];
+const MEL=[[[0,79],[4,76]],[[0,76],[3,79],[6,74]],[[0,77],[4,72]],[[0,76],[4,79]],[[0,81],[4,76]],[[0,79],[4,71]],[[0,77],[3,81],[6,77]],[[0,74],[4,71]]];
+const hz=n=>440*Math.pow(2,(n-69)/12);
+function piano(n,t,d,v){const g=ac.createGain(),lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(2800,t);lp.frequency.exponentialRampToValueAtTime(700,t+d);
+ [[1,'triangle',1],[2,'sine',.22],[3,'sine',.06]].forEach(p=>{const o=ac.createOscillator(),pg=ac.createGain();o.type=p[1];o.frequency.value=hz(n)*p[0];pg.gain.value=p[2];o.connect(pg);pg.connect(lp);o.start(t);o.stop(t+d+.1);});
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0008,t+d);g.gain.linearRampToValueAtTime(0,t+d+.05);lp.connect(g);g.connect(master);}
+function tick(){const bar=Math.floor(mStep/8)%8,st=mStep%8,t=ac.currentTime+.06;
+ if(st==0){piano(BASS[bar],t,3.5,.09);piano(BASS[bar]+12,t,2.5,.03);}
+ piano(TONES[bar][PAT[st]],t,1.6,.04);
+ MEL[bar].forEach(m=>{if(m[0]==st)piano(m[1],t,2.8,.075);});
+ mStep++;}
+function musicOn(){if(!ac){const C=window.AudioContext||window.webkitAudioContext;if(!C)return;ac=new C();
+  master=ac.createGain();master.gain.value=.55;
+  const comp=ac.createDynamicsCompressor();comp.threshold.value=-24;comp.knee.value=20;comp.ratio.value=6;comp.attack.value=.005;comp.release.value=.25;
+  const dl=ac.createDelay(),fb=ac.createGain(),wet=ac.createGain();dl.delayTime.value=.38;fb.gain.value=.3;wet.gain.value=.22;
+  master.connect(comp);master.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(wet);wet.connect(comp);comp.connect(ac.destination);}
+ if(ac.state==='suspended')ac.resume();clearInterval(mTimer);mTimer=setInterval(tick,DT*1000);mOn=true;pn.textContent='🎵';}
+function musicOff(){clearInterval(mTimer);mOn=false;pn.textContent='🔇';}
+const pn=document.getElementById('pn');
+let pnTouched=false;
+pn.addEventListener('click',e=>{e.stopPropagation();pnTouched=true;try{mOn?musicOff():musicOn();}catch(_){}});
+document.addEventListener('pointerdown',()=>{if(!pnTouched&&!mOn){try{musicOn();}catch(_){}}},{once:true});
+</script>
+</body>
+</html>
